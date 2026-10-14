@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Big_Shoulders, Big_Shoulders_Stencil, Literata } from "next/font/google";
+import Script from "next/script";
 import { SiteFooter, SiteHeader } from "@/components/Chrome";
 import { site } from "@/lib/site";
 import "./globals.css";
+
+const gaMeasurementId = "G-550KR2Q1M6";
 
 const shoulders = Big_Shoulders({
   subsets: ["latin"],
@@ -45,6 +48,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${shoulders.variable} ${stencil.variable} ${literata.variable}`}>
       <body>
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`}
+        </Script>
         <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-sodium focus:px-3 focus:py-2 focus:text-sodium-ink">
           Skip to content
         </a>
